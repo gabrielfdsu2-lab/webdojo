@@ -30,7 +30,14 @@ import './consuntancy.actions'
 import { obterDataFormatada } from './utils'
 
 Cypress.Commands.add('start', () => {
-        cy.visit('/')
+    cy.visit('/')
+})
+
+Cypress.Commands.add('goToSignup', () => {
+    cy.start()
+    cy.get('a[href="/register"]').click()
+    cy.contains('h2', 'Crie sua conta')
+        .should('be.visible')
 })
 
 Cypress.Commands.add('login', (ui = false) => {
@@ -40,7 +47,7 @@ Cypress.Commands.add('login', (ui = false) => {
         cy.submitLoginForm('papito@webdojo.com', 'katana123')
     } else {
         const token = 'e1033d63a53fe66c0fd3451c7fd8f617'
-        const login_date = obterDataFormatada ()
+        const login_date = obterDataFormatada()
 
         cy.setCookie('login_date', login_date)
 
